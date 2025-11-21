@@ -1,2 +1,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <category android:name="android.intent.category.BROWSABLE"/>
+      <data android:scheme="https"/>
+    </intent>
+  </queries>
+  <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+  <application>
+    <service android:name="com.rnlivetracking.LocationForegroundService" android:enabled="true" android:exported="false" android:foregroundServiceType="location" android:stopWithTask="false"/>
+    <service android:name="com.rnlivetracking.LocationHeadlessService" android:enabled="true" android:exported="false" android:stopWithTask="false"/>
+    <service android:name="com.rnlivetracking.LocationTaskService" android:enabled="true" android:exported="false" android:stopWithTask="false"/>
+    <receiver android:name="com.rnlivetracking.StopServiceReceiver" android:enabled="true" android:exported="false"/>
+    <receiver android:name="com.rnlivetracking.LocationAlarmReceiver" android:enabled="true" android:exported="false"/>
+    <receiver android:name="com.rnlivetracking.LocationRestartReceiver" android:enabled="true" android:exported="true">
+      <intent-filter>
+        <action android:name="RESTART_LOCATION_SERVICE"/>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+      </intent-filter>
+    </receiver>
+  </application>
 </manifest>
