@@ -22,25 +22,11 @@ yarn add react-native-rn-livetracking
 
 ### Android Setup
 
-#### 1. Add LocationPackage to MainApplication
+The package is **automatically linked** by React Native's autolinking system. No manual linking required! 🎉
 
-In your `android/app/src/main/java/.../MainApplication.kt` (or `.java`):
+#### Permissions
 
-```kotlin
-import com.rnlivetracking.LocationPackage
-
-class MainApplication : Application(), ReactApplication {
-  override fun getPackages(): List<ReactPackage> {
-    return PackageList(this).packages.apply {
-      add(LocationPackage()) // Add this line
-    }
-  }
-}
-```
-
-#### 2. Add Permissions to AndroidManifest.xml
-
-The library's AndroidManifest already includes required permissions, but ensure your app's `AndroidManifest.xml` has:
+The library's AndroidManifest already includes required permissions. However, ensure your app's `AndroidManifest.xml` has:
 
 ```xml
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -50,7 +36,7 @@ The library's AndroidManifest already includes required permissions, but ensure 
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 ```
 
-#### 3. Request Runtime Permissions
+#### Request Runtime Permissions
 
 You need to request location permissions at runtime:
 
@@ -107,7 +93,11 @@ export default function App() {
 
     return () => {
       // Cleanup subscription
-      if (subscription && typeof subscription === 'object' && 'remove' in subscription) {
+      if (
+        subscription &&
+        typeof subscription === 'object' &&
+        'remove' in subscription
+      ) {
         subscription.remove();
       } else if (typeof subscription === 'function') {
         subscription();
@@ -152,13 +142,17 @@ export default function App() {
 
   useEffect(() => {
     requestLocationPermission();
-    
+
     const subscription = addLocationListener((loc: LocationData) => {
       setLocation(loc);
     });
 
     return () => {
-      if (subscription && typeof subscription === 'object' && 'remove' in subscription) {
+      if (
+        subscription &&
+        typeof subscription === 'object' &&
+        'remove' in subscription
+      ) {
         subscription.remove();
       } else if (typeof subscription === 'function') {
         subscription();
@@ -191,7 +185,10 @@ export default function App() {
 
   const handleStart = () => {
     if (!hasPermission) {
-      Alert.alert('Permission Required', 'Please grant location permissions first.');
+      Alert.alert(
+        'Permission Required',
+        'Please grant location permissions first.'
+      );
       requestLocationPermission();
       return;
     }
@@ -248,13 +245,18 @@ addLocationListener(
 ```
 
 **Example:**
+
 ```typescript
 const subscription = addLocationListener((location) => {
   console.log('New location:', location);
 });
 
 // Later, to unsubscribe:
-if (subscription && typeof subscription === 'object' && 'remove' in subscription) {
+if (
+  subscription &&
+  typeof subscription === 'object' &&
+  'remove' in subscription
+) {
   subscription.remove();
 }
 ```
@@ -265,13 +267,13 @@ if (subscription && typeof subscription === 'object' && 'remove' in subscription
 
 ```typescript
 interface LocationData {
-  latitude: number;      // Latitude in degrees
-  longitude: number;     // Longitude in degrees
-  accuracy: number;      // Accuracy in meters
-  timestamp: number;     // Unix timestamp in milliseconds
-  time: string;          // Formatted time string (HH:mm:ss)
-  realtime: boolean;     // Always true for realtime tracking
-  source: string;        // Source of location update (e.g., "fused_provider", "alarm_forced")
+  latitude: number; // Latitude in degrees
+  longitude: number; // Longitude in degrees
+  accuracy: number; // Accuracy in meters
+  timestamp: number; // Unix timestamp in milliseconds
+  time: string; // Formatted time string (HH:mm:ss)
+  realtime: boolean; // Always true for realtime tracking
+  source: string; // Source of location update (e.g., "fused_provider", "alarm_forced")
 }
 ```
 
@@ -280,6 +282,7 @@ interface LocationData {
 1. **Foreground Service**: Uses Android's foreground service to ensure the tracking continues even when the app is in the background.
 
 2. **Dual Tracking Strategy**:
+
    - Fused Location Provider for regular updates
    - AlarmManager for exact timing (every 5 minutes)
    - JS Bridge keep-alive to maintain React Native context
