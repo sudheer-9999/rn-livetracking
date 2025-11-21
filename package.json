@@ -47,14 +47,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sudheer-9999/react-native-rn-livetracking.git"
+    "url": "git+https://github.com/sudheer-9999/rn-livetracking.git"
   },
   "author": "sudheer-9999 <bandarusudheer75@gmail.com> (https://github.com/sudheer-9999)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sudheer-9999/react-native-rn-livetracking/issues"
+    "url": "https://github.com/sudheer-9999/rn-livetracking/issues"
   },
-  "homepage": "https://github.com/sudheer-9999/react-native-rn-livetracking#readme",
+  "homepage": "https://github.com/sudheer-9999/rn-livetracking#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

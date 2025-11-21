@@ -360,4 +360,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support
 
-For issues and feature requests, please use the [GitHub Issues](https://github.com/sudheer-9999/react-native-rn-livetracking/issues) page.
+For issues and feature requests, please use the [GitHub Issues](https://github.com/sudheer-9999/rn-livetracking/issues) page.
